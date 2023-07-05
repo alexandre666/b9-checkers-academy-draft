@@ -9,6 +9,7 @@ option go_package = "github.com/b9lab/checkers/x/checkers/types";
 service Msg {
       rpc CreateGame(MsgCreateGame) returns (MsgCreateGameResponse);
   rpc PlayMove(MsgPlayMove) returns (MsgPlayMoveResponse);
+  rpc CreateEnergy(MsgCreateEnergy) returns (MsgCreateEnergyResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -37,6 +38,15 @@ message MsgPlayMoveResponse {
   int32 capturedX = 1;
   int32 capturedY = 2;
   string winner = 3;
+}
+
+message MsgCreateEnergy {
+  string creator = 1;
+  string kwh = 2;
+}
+
+message MsgCreateEnergyResponse {
+  string gameIndex = 1;
 }
 
 // this line is used by starport scaffolding # proto/tx/message

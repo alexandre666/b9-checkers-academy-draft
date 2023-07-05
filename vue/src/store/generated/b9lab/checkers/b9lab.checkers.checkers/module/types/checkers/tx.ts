@@ -31,6 +31,15 @@ export interface MsgPlayMoveResponse {
   winner: string;
 }
 
+export interface MsgCreateEnergy {
+  creator: string;
+  kwh: string;
+}
+
+export interface MsgCreateEnergyResponse {
+  gameIndex: string;
+}
+
 const baseMsgCreateGame: object = {
   creator: "",
   black: "",
@@ -463,11 +472,150 @@ export const MsgPlayMoveResponse = {
   },
 };
 
+const baseMsgCreateEnergy: object = { creator: "", kwh: "" };
+
+export const MsgCreateEnergy = {
+  encode(message: MsgCreateEnergy, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.kwh !== "") {
+      writer.uint32(18).string(message.kwh);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCreateEnergy {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgCreateEnergy } as MsgCreateEnergy;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.kwh = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateEnergy {
+    const message = { ...baseMsgCreateEnergy } as MsgCreateEnergy;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.kwh !== undefined && object.kwh !== null) {
+      message.kwh = String(object.kwh);
+    } else {
+      message.kwh = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgCreateEnergy): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.kwh !== undefined && (obj.kwh = message.kwh);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateEnergy>): MsgCreateEnergy {
+    const message = { ...baseMsgCreateEnergy } as MsgCreateEnergy;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.kwh !== undefined && object.kwh !== null) {
+      message.kwh = object.kwh;
+    } else {
+      message.kwh = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgCreateEnergyResponse: object = { gameIndex: "" };
+
+export const MsgCreateEnergyResponse = {
+  encode(
+    message: MsgCreateEnergyResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.gameIndex !== "") {
+      writer.uint32(10).string(message.gameIndex);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCreateEnergyResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgCreateEnergyResponse,
+    } as MsgCreateEnergyResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.gameIndex = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateEnergyResponse {
+    const message = {
+      ...baseMsgCreateEnergyResponse,
+    } as MsgCreateEnergyResponse;
+    if (object.gameIndex !== undefined && object.gameIndex !== null) {
+      message.gameIndex = String(object.gameIndex);
+    } else {
+      message.gameIndex = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgCreateEnergyResponse): unknown {
+    const obj: any = {};
+    message.gameIndex !== undefined && (obj.gameIndex = message.gameIndex);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<MsgCreateEnergyResponse>
+  ): MsgCreateEnergyResponse {
+    const message = {
+      ...baseMsgCreateEnergyResponse,
+    } as MsgCreateEnergyResponse;
+    if (object.gameIndex !== undefined && object.gameIndex !== null) {
+      message.gameIndex = object.gameIndex;
+    } else {
+      message.gameIndex = "";
+    }
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateGame(request: MsgCreateGame): Promise<MsgCreateGameResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   PlayMove(request: MsgPlayMove): Promise<MsgPlayMoveResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  CreateEnergy(request: MsgCreateEnergy): Promise<MsgCreateEnergyResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -495,6 +643,18 @@ export class MsgClientImpl implements Msg {
       data
     );
     return promise.then((data) => MsgPlayMoveResponse.decode(new Reader(data)));
+  }
+
+  CreateEnergy(request: MsgCreateEnergy): Promise<MsgCreateEnergyResponse> {
+    const data = MsgCreateEnergy.encode(request).finish();
+    const promise = this.rpc.request(
+      "b9lab.checkers.checkers.Msg",
+      "CreateEnergy",
+      data
+    );
+    return promise.then((data) =>
+      MsgCreateEnergyResponse.decode(new Reader(data))
+    );
   }
 }
 

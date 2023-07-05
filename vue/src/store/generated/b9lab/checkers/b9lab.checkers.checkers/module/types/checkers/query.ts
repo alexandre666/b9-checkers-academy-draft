@@ -9,6 +9,7 @@ import {
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
 import { PlayerInfo } from "../checkers/player_info";
+import { Storedenergy } from "../checkers/storedenergy";
 
 export const protobufPackage = "b9lab.checkers.checkers";
 
@@ -72,6 +73,23 @@ export interface QueryAllPlayerInfoRequest {
 
 export interface QueryAllPlayerInfoResponse {
   playerInfo: PlayerInfo[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetStoredenergyRequest {
+  index: string;
+}
+
+export interface QueryGetStoredenergyResponse {
+  storedenergy: Storedenergy | undefined;
+}
+
+export interface QueryAllStoredenergyRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllStoredenergyResponse {
+  storedenergy: Storedenergy[];
   pagination: PageResponse | undefined;
 }
 
@@ -1168,6 +1186,325 @@ export const QueryAllPlayerInfoResponse = {
   },
 };
 
+const baseQueryGetStoredenergyRequest: object = { index: "" };
+
+export const QueryGetStoredenergyRequest = {
+  encode(
+    message: QueryGetStoredenergyRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredenergyRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredenergyRequest,
+    } as QueryGetStoredenergyRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredenergyRequest {
+    const message = {
+      ...baseQueryGetStoredenergyRequest,
+    } as QueryGetStoredenergyRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredenergyRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredenergyRequest>
+  ): QueryGetStoredenergyRequest {
+    const message = {
+      ...baseQueryGetStoredenergyRequest,
+    } as QueryGetStoredenergyRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStoredenergyResponse: object = {};
+
+export const QueryGetStoredenergyResponse = {
+  encode(
+    message: QueryGetStoredenergyResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.storedenergy !== undefined) {
+      Storedenergy.encode(
+        message.storedenergy,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStoredenergyResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStoredenergyResponse,
+    } as QueryGetStoredenergyResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedenergy = Storedenergy.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStoredenergyResponse {
+    const message = {
+      ...baseQueryGetStoredenergyResponse,
+    } as QueryGetStoredenergyResponse;
+    if (object.storedenergy !== undefined && object.storedenergy !== null) {
+      message.storedenergy = Storedenergy.fromJSON(object.storedenergy);
+    } else {
+      message.storedenergy = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStoredenergyResponse): unknown {
+    const obj: any = {};
+    message.storedenergy !== undefined &&
+      (obj.storedenergy = message.storedenergy
+        ? Storedenergy.toJSON(message.storedenergy)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStoredenergyResponse>
+  ): QueryGetStoredenergyResponse {
+    const message = {
+      ...baseQueryGetStoredenergyResponse,
+    } as QueryGetStoredenergyResponse;
+    if (object.storedenergy !== undefined && object.storedenergy !== null) {
+      message.storedenergy = Storedenergy.fromPartial(object.storedenergy);
+    } else {
+      message.storedenergy = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredenergyRequest: object = {};
+
+export const QueryAllStoredenergyRequest = {
+  encode(
+    message: QueryAllStoredenergyRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredenergyRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredenergyRequest,
+    } as QueryAllStoredenergyRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredenergyRequest {
+    const message = {
+      ...baseQueryAllStoredenergyRequest,
+    } as QueryAllStoredenergyRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredenergyRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredenergyRequest>
+  ): QueryAllStoredenergyRequest {
+    const message = {
+      ...baseQueryAllStoredenergyRequest,
+    } as QueryAllStoredenergyRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStoredenergyResponse: object = {};
+
+export const QueryAllStoredenergyResponse = {
+  encode(
+    message: QueryAllStoredenergyResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.storedenergy) {
+      Storedenergy.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStoredenergyResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStoredenergyResponse,
+    } as QueryAllStoredenergyResponse;
+    message.storedenergy = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.storedenergy.push(
+            Storedenergy.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStoredenergyResponse {
+    const message = {
+      ...baseQueryAllStoredenergyResponse,
+    } as QueryAllStoredenergyResponse;
+    message.storedenergy = [];
+    if (object.storedenergy !== undefined && object.storedenergy !== null) {
+      for (const e of object.storedenergy) {
+        message.storedenergy.push(Storedenergy.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStoredenergyResponse): unknown {
+    const obj: any = {};
+    if (message.storedenergy) {
+      obj.storedenergy = message.storedenergy.map((e) =>
+        e ? Storedenergy.toJSON(e) : undefined
+      );
+    } else {
+      obj.storedenergy = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStoredenergyResponse>
+  ): QueryAllStoredenergyResponse {
+    const message = {
+      ...baseQueryAllStoredenergyResponse,
+    } as QueryAllStoredenergyResponse;
+    message.storedenergy = [];
+    if (object.storedenergy !== undefined && object.storedenergy !== null) {
+      for (const e of object.storedenergy) {
+        message.storedenergy.push(Storedenergy.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1196,6 +1533,14 @@ export interface Query {
   PlayerInfoAll(
     request: QueryAllPlayerInfoRequest
   ): Promise<QueryAllPlayerInfoResponse>;
+  /** Queries a Storedenergy by index. */
+  Storedenergy(
+    request: QueryGetStoredenergyRequest
+  ): Promise<QueryGetStoredenergyResponse>;
+  /** Queries a list of Storedenergy items. */
+  StoredenergyAll(
+    request: QueryAllStoredenergyRequest
+  ): Promise<QueryAllStoredenergyResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1294,6 +1639,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllPlayerInfoResponse.decode(new Reader(data))
+    );
+  }
+
+  Storedenergy(
+    request: QueryGetStoredenergyRequest
+  ): Promise<QueryGetStoredenergyResponse> {
+    const data = QueryGetStoredenergyRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "b9lab.checkers.checkers.Query",
+      "Storedenergy",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetStoredenergyResponse.decode(new Reader(data))
+    );
+  }
+
+  StoredenergyAll(
+    request: QueryAllStoredenergyRequest
+  ): Promise<QueryAllStoredenergyResponse> {
+    const data = QueryAllStoredenergyRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "b9lab.checkers.checkers.Query",
+      "StoredenergyAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllStoredenergyResponse.decode(new Reader(data))
     );
   }
 }

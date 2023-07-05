@@ -9,6 +9,10 @@
  * ---------------------------------------------------------------
  */
 
+export interface CheckersMsgCreateEnergyResponse {
+  gameIndex?: string;
+}
+
 export interface CheckersMsgCreateGameResponse {
   gameIndex?: string;
 }
@@ -70,6 +74,21 @@ export interface CheckersQueryAllStoredGameResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface CheckersQueryAllStoredenergyResponse {
+  storedenergy?: CheckersStoredenergy[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface CheckersQueryCanPlayMoveResponse {
   possible?: boolean;
   reason?: string;
@@ -81,6 +100,10 @@ export interface CheckersQueryGetPlayerInfoResponse {
 
 export interface CheckersQueryGetStoredGameResponse {
   storedGame?: CheckersStoredGame;
+}
+
+export interface CheckersQueryGetStoredenergyResponse {
+  storedenergy?: CheckersStoredenergy;
 }
 
 export interface CheckersQueryGetSystemInfoResponse {
@@ -112,6 +135,11 @@ export interface CheckersStoredGame {
   /** @format uint64 */
   wager?: string;
   denom?: string;
+}
+
+export interface CheckersStoredenergy {
+  index?: string;
+  kwh?: string;
 }
 
 export interface CheckersSystemInfo {
@@ -510,6 +538,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryStoredGame = (index: string, params: RequestParams = {}) =>
     this.request<CheckersQueryGetStoredGameResponse, RpcStatus>({
       path: `/b9lab/checkers/checkers/stored_game/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredenergyAll
+   * @summary Queries a list of Storedenergy items.
+   * @request GET:/b9lab/checkers/checkers/storedenergy
+   */
+  queryStoredenergyAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<CheckersQueryAllStoredenergyResponse, RpcStatus>({
+      path: `/b9lab/checkers/checkers/storedenergy`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredenergy
+   * @summary Queries a Storedenergy by index.
+   * @request GET:/b9lab/checkers/checkers/storedenergy/{index}
+   */
+  queryStoredenergy = (index: string, params: RequestParams = {}) =>
+    this.request<CheckersQueryGetStoredenergyResponse, RpcStatus>({
+      path: `/b9lab/checkers/checkers/storedenergy/${index}`,
       method: "GET",
       format: "json",
       ...params,

@@ -19,6 +19,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.PlayerInfoList {
 		k.SetPlayerInfo(ctx, elem)
 	}
+	// Set all the storedenergy
+	for _, elem := range genState.StoredenergyList {
+		k.SetStoredenergy(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -35,6 +39,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	}
 	genesis.StoredGameList = k.GetAllStoredGame(ctx)
 	genesis.PlayerInfoList = k.GetAllPlayerInfo(ctx)
+	genesis.StoredenergyList = k.GetAllStoredenergy(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

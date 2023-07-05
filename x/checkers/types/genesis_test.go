@@ -41,6 +41,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				StoredenergyList: []types.Storedenergy{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -63,6 +71,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated playerInfo",
 			genState: &types.GenesisState{
 				PlayerInfoList: []types.PlayerInfo{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated storedenergy",
+			genState: &types.GenesisState{
+				StoredenergyList: []types.Storedenergy{
 					{
 						Index: "0",
 					},

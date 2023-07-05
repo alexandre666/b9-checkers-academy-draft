@@ -8,6 +8,7 @@ import "checkers/params.proto";
 import "checkers/system_info.proto";
 import "checkers/stored_game.proto";
 import "checkers/player_info.proto";
+import "checkers/storedenergy.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/b9lab/checkers/x/checkers/types";
@@ -45,6 +46,16 @@ service Query {
 	// Queries a list of PlayerInfo items.
 	rpc PlayerInfoAll(QueryAllPlayerInfoRequest) returns (QueryAllPlayerInfoResponse) {
 		option (google.api.http).get = "/b9lab/checkers/checkers/player_info";
+	}
+
+// Queries a Storedenergy by index.
+	rpc Storedenergy(QueryGetStoredenergyRequest) returns (QueryGetStoredenergyResponse) {
+		option (google.api.http).get = "/b9lab/checkers/checkers/storedenergy/{index}";
+	}
+
+	// Queries a list of Storedenergy items.
+	rpc StoredenergyAll(QueryAllStoredenergyRequest) returns (QueryAllStoredenergyResponse) {
+		option (google.api.http).get = "/b9lab/checkers/checkers/storedenergy";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -111,6 +122,24 @@ message QueryAllPlayerInfoRequest {
 
 message QueryAllPlayerInfoResponse {
 	repeated PlayerInfo playerInfo = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetStoredenergyRequest {
+	  string index = 1;
+
+}
+
+message QueryGetStoredenergyResponse {
+	Storedenergy storedenergy = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredenergyRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredenergyResponse {
+	repeated Storedenergy storedenergy = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

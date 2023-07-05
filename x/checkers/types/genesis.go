@@ -15,8 +15,9 @@ func DefaultGenesis() *GenesisState {
 			FifoHeadIndex: NoFifoIndex,
 			FifoTailIndex: NoFifoIndex,
 		},
-		StoredGameList: []StoredGame{},
-		PlayerInfoList: []PlayerInfo{},
+		StoredGameList:   []StoredGame{},
+		PlayerInfoList:   []PlayerInfo{},
+		StoredenergyList: []Storedenergy{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -44,6 +45,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for playerInfo")
 		}
 		playerInfoIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in storedenergy
+	storedenergyIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.StoredenergyList {
+		index := string(StoredenergyKey(elem.Index))
+		if _, ok := storedenergyIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for storedenergy")
+		}
+		storedenergyIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
