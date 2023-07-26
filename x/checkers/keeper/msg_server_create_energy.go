@@ -10,8 +10,13 @@ import (
 func (k msgServer) CreateEnergy(goCtx context.Context, msg *types.MsgCreateEnergy) (*types.MsgCreateEnergyResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+
+	storedEnergy := types.Energy{
+		Kwh: msg.Kwh,
+
+	}
+
+	k.Keeper.SetEnergy(ctx, storedEnergy)
 
 	return &types.MsgCreateEnergyResponse{}, nil
 }

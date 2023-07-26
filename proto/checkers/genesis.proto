@@ -7,6 +7,8 @@ import "checkers/system_info.proto";
 import "checkers/stored_game.proto";
 import "checkers/player_info.proto";
 import "checkers/storedenergy.proto";
+import "checkers/stored_energy.proto";
+import "checkers/energy.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/b9lab/checkers/x/checkers/types";
@@ -18,5 +20,7 @@ message GenesisState {
   repeated StoredGame storedGameList = 3 [(gogoproto.nullable) = false];
   repeated PlayerInfo playerInfoList = 4 [(gogoproto.nullable) = false];
   repeated Storedenergy storedenergyList = 5 [(gogoproto.nullable) = false];
+  repeated StoredEnergy storedEnergyLists = 6 [(gogoproto.nullable) = false];
+  repeated Energy energyList = 7 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

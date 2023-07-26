@@ -49,7 +49,23 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				// this line is used by starport scaffolding # types/genesis/validField
+				StoredEnergyList: []types.StoredEnergy{
+	{
+		Index: "0",
+},
+	{
+		Index: "1",
+},
+},
+EnergyList: []types.Energy{
+	{
+		Index: "0",
+},
+	{
+		Index: "1",
+},
+},
+// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
 		},
@@ -95,7 +111,35 @@ func TestGenesisState_Validate(t *testing.T) {
 			},
 			valid: false,
 		},
-		// this line is used by starport scaffolding # types/genesis/testcase
+		{
+	desc:     "duplicated storedEnergy",
+	genState: &types.GenesisState{
+		StoredEnergyList: []types.StoredEnergy{
+			{
+				Index: "0",
+},
+			{
+				Index: "0",
+},
+		},
+	},
+	valid:    false,
+},
+{
+	desc:     "duplicated energy",
+	genState: &types.GenesisState{
+		EnergyList: []types.Energy{
+			{
+				Index: "0",
+},
+			{
+				Index: "0",
+},
+		},
+	},
+	valid:    false,
+},
+// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()

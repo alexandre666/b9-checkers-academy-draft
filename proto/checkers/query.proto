@@ -9,6 +9,8 @@ import "checkers/system_info.proto";
 import "checkers/stored_game.proto";
 import "checkers/player_info.proto";
 import "checkers/storedenergy.proto";
+import "checkers/stored_energy.proto";
+import "checkers/energy.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/b9lab/checkers/x/checkers/types";
@@ -56,6 +58,26 @@ service Query {
 	// Queries a list of Storedenergy items.
 	rpc StoredenergyAll(QueryAllStoredenergyRequest) returns (QueryAllStoredenergyResponse) {
 		option (google.api.http).get = "/b9lab/checkers/checkers/storedenergy";
+	}
+
+// Queries a StoredEnergy by index.
+	rpc StoredEnergy(QueryGetStoredEnergyRequest) returns (QueryGetStoredEnergyResponse) {
+		option (google.api.http).get = "/b9lab/checkers/checkers/stored_energy/{index}";
+	}
+
+	// Queries a list of StoredEnergy items.
+	rpc StoredEnergyAll(QueryAllStoredEnergyRequest) returns (QueryAllStoredEnergyResponse) {
+		option (google.api.http).get = "/b9lab/checkers/checkers/stored_energy";
+	}
+
+// Queries a Energy by index.
+	rpc Energy(QueryGetEnergyRequest) returns (QueryGetEnergyResponse) {
+		option (google.api.http).get = "/b9lab/checkers/checkers/energy/{index}";
+	}
+
+	// Queries a list of Energy items.
+	rpc EnergyAll(QueryAllEnergyRequest) returns (QueryAllEnergyResponse) {
+		option (google.api.http).get = "/b9lab/checkers/checkers/energy";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -140,6 +162,42 @@ message QueryAllStoredenergyRequest {
 
 message QueryAllStoredenergyResponse {
 	repeated Storedenergy storedenergy = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetStoredEnergyRequest {
+	  string index = 1;
+
+}
+
+message QueryGetStoredEnergyResponse {
+	StoredEnergy storedEnergy = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredEnergyRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredEnergyResponse {
+	repeated StoredEnergy storedEnergy = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetEnergyRequest {
+	  string index = 1;
+
+}
+
+message QueryGetEnergyResponse {
+	Energy energy = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEnergyRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEnergyResponse {
+	repeated Energy energy = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

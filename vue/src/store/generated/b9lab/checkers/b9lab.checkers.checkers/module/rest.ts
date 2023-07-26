@@ -9,6 +9,11 @@
  * ---------------------------------------------------------------
  */
 
+export interface CheckersEnergy {
+  index?: string;
+  kwh?: string;
+}
+
 export interface CheckersMsgCreateEnergyResponse {
   gameIndex?: string;
 }
@@ -44,8 +49,38 @@ export interface CheckersPlayerInfo {
   forfeitedCount?: string;
 }
 
+export interface CheckersQueryAllEnergyResponse {
+  energy?: CheckersEnergy[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface CheckersQueryAllPlayerInfoResponse {
   playerInfo?: CheckersPlayerInfo[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface CheckersQueryAllStoredEnergyResponse {
+  storedEnergy?: CheckersStoredEnergy[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -94,8 +129,16 @@ export interface CheckersQueryCanPlayMoveResponse {
   reason?: string;
 }
 
+export interface CheckersQueryGetEnergyResponse {
+  energy?: CheckersEnergy;
+}
+
 export interface CheckersQueryGetPlayerInfoResponse {
   playerInfo?: CheckersPlayerInfo;
+}
+
+export interface CheckersQueryGetStoredEnergyResponse {
+  storedEnergy?: CheckersStoredEnergy;
 }
 
 export interface CheckersQueryGetStoredGameResponse {
@@ -116,6 +159,11 @@ export interface CheckersQueryGetSystemInfoResponse {
 export interface CheckersQueryParamsResponse {
   /** params holds all the parameters of this module. */
   params?: CheckersParams;
+}
+
+export interface CheckersStoredEnergy {
+  index?: string;
+  kwh?: string;
 }
 
 export interface CheckersStoredGame {
@@ -415,7 +463,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title checkers/genesis.proto
+ * @title checkers/energy.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
@@ -438,6 +486,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   ) =>
     this.request<CheckersQueryCanPlayMoveResponse, RpcStatus>({
       path: `/b9lab/checkers/checkers/can_play_move/${gameIndex}/${player}/${fromX}/${fromY}/${toX}/${toY}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEnergyAll
+   * @summary Queries a list of Energy items.
+   * @request GET:/b9lab/checkers/checkers/energy
+   */
+  queryEnergyAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<CheckersQueryAllEnergyResponse, RpcStatus>({
+      path: `/b9lab/checkers/checkers/energy`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEnergy
+   * @summary Queries a Energy by index.
+   * @request GET:/b9lab/checkers/checkers/energy/{index}
+   */
+  queryEnergy = (index: string, params: RequestParams = {}) =>
+    this.request<CheckersQueryGetEnergyResponse, RpcStatus>({
+      path: `/b9lab/checkers/checkers/energy/${index}`,
       method: "GET",
       format: "json",
       ...params,
@@ -496,6 +586,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryPlayerInfo = (index: string, params: RequestParams = {}) =>
     this.request<CheckersQueryGetPlayerInfoResponse, RpcStatus>({
       path: `/b9lab/checkers/checkers/player_info/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredEnergyAll
+   * @summary Queries a list of StoredEnergy items.
+   * @request GET:/b9lab/checkers/checkers/stored_energy
+   */
+  queryStoredEnergyAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<CheckersQueryAllStoredEnergyResponse, RpcStatus>({
+      path: `/b9lab/checkers/checkers/stored_energy`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStoredEnergy
+   * @summary Queries a StoredEnergy by index.
+   * @request GET:/b9lab/checkers/checkers/stored_energy/{index}
+   */
+  queryStoredEnergy = (index: string, params: RequestParams = {}) =>
+    this.request<CheckersQueryGetStoredEnergyResponse, RpcStatus>({
+      path: `/b9lab/checkers/checkers/stored_energy/${index}`,
       method: "GET",
       format: "json",
       ...params,

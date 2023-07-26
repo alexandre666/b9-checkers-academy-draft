@@ -1,13 +1,15 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { Energy } from "./module/types/checkers/energy"
 import { Params } from "./module/types/checkers/params"
 import { PlayerInfo } from "./module/types/checkers/player_info"
+import { StoredEnergy } from "./module/types/checkers/stored_energy"
 import { StoredGame } from "./module/types/checkers/stored_game"
 import { Storedenergy } from "./module/types/checkers/storedenergy"
 import { SystemInfo } from "./module/types/checkers/system_info"
 
 
-export { Params, PlayerInfo, StoredGame, Storedenergy, SystemInfo };
+export { Energy, Params, PlayerInfo, StoredEnergy, StoredGame, Storedenergy, SystemInfo };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -54,10 +56,16 @@ const getDefaultState = () => {
 				PlayerInfoAll: {},
 				Storedenergy: {},
 				StoredenergyAll: {},
+				StoredEnergy: {},
+				StoredEnergyAll: {},
+				Energy: {},
+				EnergyAll: {},
 				
 				_Structure: {
+						Energy: getStructure(Energy.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						PlayerInfo: getStructure(PlayerInfo.fromPartial({})),
+						StoredEnergy: getStructure(StoredEnergy.fromPartial({})),
 						StoredGame: getStructure(StoredGame.fromPartial({})),
 						Storedenergy: getStructure(Storedenergy.fromPartial({})),
 						SystemInfo: getStructure(SystemInfo.fromPartial({})),
@@ -142,6 +150,30 @@ export default {
 						(<any> params).query=null
 					}
 			return state.StoredenergyAll[JSON.stringify(params)] ?? {}
+		},
+				getStoredEnergy: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredEnergy[JSON.stringify(params)] ?? {}
+		},
+				getStoredEnergyAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredEnergyAll[JSON.stringify(params)] ?? {}
+		},
+				getEnergy: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.Energy[JSON.stringify(params)] ?? {}
+		},
+				getEnergyAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.EnergyAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -387,6 +419,117 @@ export default {
 		},
 		
 		
+		
+		
+		 		
+		
+		
+		async QueryStoredEnergy({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredEnergy( key.index)).data
+				
+					
+				commit('QUERY', { query: 'StoredEnergy', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredEnergy', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredEnergy']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredEnergy API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredEnergyAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredEnergyAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryStoredEnergyAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'StoredEnergyAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredEnergyAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredEnergyAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredEnergyAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryEnergy({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryEnergy( key.index)).data
+				
+					
+				commit('QUERY', { query: 'Energy', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryEnergy', payload: { options: { all }, params: {...key},query }})
+				return getters['getEnergy']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryEnergy API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryEnergyAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryEnergyAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryEnergyAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'EnergyAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryEnergyAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getEnergyAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryEnergyAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		async sendMsgPlayMove({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgPlayMove(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgPlayMove:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgPlayMove:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		async sendMsgCreateEnergy({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -417,22 +560,20 @@ export default {
 				}
 			}
 		},
-		async sendMsgPlayMove({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		async MsgPlayMove({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgPlayMove(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
+				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
 					throw new Error('TxClient:MsgPlayMove:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgPlayMove:Send Could not broadcast Tx: '+ e.message)
+				} else{
+					throw new Error('TxClient:MsgPlayMove:Create Could not create message: ' + e.message)
 				}
 			}
 		},
-		
 		async MsgCreateEnergy({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -456,19 +597,6 @@ export default {
 					throw new Error('TxClient:MsgCreateGame:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgCreateGame:Create Could not create message: ' + e.message)
-				}
-			}
-		},
-		async MsgPlayMove({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgPlayMove(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgPlayMove:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgPlayMove:Create Could not create message: ' + e.message)
 				}
 			}
 		},

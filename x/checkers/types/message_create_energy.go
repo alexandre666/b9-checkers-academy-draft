@@ -42,5 +42,9 @@ func (msg *MsgCreateEnergy) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+    _, err = sdk.AccAddressFromBech32(msg.Kwh)
+    if err != nil {
+        return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid kwh address (%s)", err)
+    }
 	return nil
 }

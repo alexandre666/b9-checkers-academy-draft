@@ -41,7 +41,23 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
-		// this line is used by starport scaffolding # genesis/test/state
+		StoredEnergyList: []types.StoredEnergy{
+		{
+			Index: "0",
+},
+		{
+			Index: "1",
+},
+	},
+	EnergyList: []types.Energy{
+		{
+			Index: "0",
+},
+		{
+			Index: "1",
+},
+	},
+	// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.CheckersKeeper(t)
@@ -56,5 +72,7 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.StoredGameList, got.StoredGameList)
 	require.ElementsMatch(t, genesisState.PlayerInfoList, got.PlayerInfoList)
 	require.ElementsMatch(t, genesisState.StoredenergyList, got.StoredenergyList)
-	// this line is used by starport scaffolding # genesis/test/assert
+	require.ElementsMatch(t, genesisState.StoredEnergyList, got.StoredEnergyList)
+require.ElementsMatch(t, genesisState.EnergyList, got.EnergyList)
+// this line is used by starport scaffolding # genesis/test/assert
 }
