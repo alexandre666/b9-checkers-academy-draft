@@ -22,18 +22,27 @@ if __name__ == '__main__':
     #build validators
     file.write("validator:"+"\n")
     for validator in range(int(validators)):
-        file.write("  name: "+"validator"+str(validator)+"\n")
+        file.write("  name: "+"household"+str(validator)+"\n")
         file.write('  staked: "'+stake+'stake"'+"\n")
 
     #build client
     file.write("client:"+"\n")
-    file.write("  openapi:"+"\n")
-    file.write('    path: "docs/static/openapi.yml"'+"\n")
     file.write("  vuex:"+"\n")
     file.write('    path: "vue/src/store"'+"\n")
+    file.write("  openapi:"+"\n")
+    file.write('    path: "docs/static/openapi.yml"'+"\n")
 
     #build faucet
     file.write("faucet:"+"\n")
     file.write("  name: "+"household1"+"\n")
     file.write('  coins: ["5token", "100000stake"]'+"\n")
     file.close()
+
+    #create file transaction.sh
+    file = open("transaction.sh", "w")
+
+    file.write("#!/bin/bash"+"\n")
+    for household in range(int(households)):
+         file.write("household"+str(household)+"=$(docker exec checkers checkersd keys show household"+str(household)+ " -a)"+"\n")
+         file.write("export household"+str(household)+"\n")
+         file.write('echo "household'+str(household)+': $household'+str(household)+'"'+"\n")

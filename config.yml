@@ -1,250 +1,150 @@
 accounts:
   - name: household0
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household1
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household2
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household3
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household4
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household5
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household6
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household7
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household8
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household9
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household10
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household11
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household12
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household13
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household14
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household15
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household16
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household17
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household18
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household19
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household20
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household21
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household22
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household23
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household24
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household25
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household26
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household27
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household28
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household29
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household30
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household31
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household32
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household33
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household34
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household35
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household36
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household37
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household38
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household39
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household40
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household41
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household42
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household43
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household44
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household45
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household46
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household47
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household48
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
   - name: household49
-    coins: ["10000token", "100000stake"]
-  - name: household50
-    coins: ["10000token", "100000stake"]
-  - name: household51
-    coins: ["10000token", "100000stake"]
-  - name: household52
-    coins: ["10000token", "100000stake"]
-  - name: household53
-    coins: ["10000token", "100000stake"]
-  - name: household54
-    coins: ["10000token", "100000stake"]
-  - name: household55
-    coins: ["10000token", "100000stake"]
-  - name: household56
-    coins: ["10000token", "100000stake"]
-  - name: household57
-    coins: ["10000token", "100000stake"]
-  - name: household58
-    coins: ["10000token", "100000stake"]
-  - name: household59
-    coins: ["10000token", "100000stake"]
-  - name: household60
-    coins: ["10000token", "100000stake"]
-  - name: household61
-    coins: ["10000token", "100000stake"]
-  - name: household62
-    coins: ["10000token", "100000stake"]
-  - name: household63
-    coins: ["10000token", "100000stake"]
-  - name: household64
-    coins: ["10000token", "100000stake"]
-  - name: household65
-    coins: ["10000token", "100000stake"]
-  - name: household66
-    coins: ["10000token", "100000stake"]
-  - name: household67
-    coins: ["10000token", "100000stake"]
-  - name: household68
-    coins: ["10000token", "100000stake"]
-  - name: household69
-    coins: ["10000token", "100000stake"]
-  - name: household70
-    coins: ["10000token", "100000stake"]
-  - name: household71
-    coins: ["10000token", "100000stake"]
-  - name: household72
-    coins: ["10000token", "100000stake"]
-  - name: household73
-    coins: ["10000token", "100000stake"]
-  - name: household74
-    coins: ["10000token", "100000stake"]
-  - name: household75
-    coins: ["10000token", "100000stake"]
-  - name: household76
-    coins: ["10000token", "100000stake"]
-  - name: household77
-    coins: ["10000token", "100000stake"]
-  - name: household78
-    coins: ["10000token", "100000stake"]
-  - name: household79
-    coins: ["10000token", "100000stake"]
-  - name: household80
-    coins: ["10000token", "100000stake"]
-  - name: household81
-    coins: ["10000token", "100000stake"]
-  - name: household82
-    coins: ["10000token", "100000stake"]
-  - name: household83
-    coins: ["10000token", "100000stake"]
-  - name: household84
-    coins: ["10000token", "100000stake"]
-  - name: household85
-    coins: ["10000token", "100000stake"]
-  - name: household86
-    coins: ["10000token", "100000stake"]
-  - name: household87
-    coins: ["10000token", "100000stake"]
-  - name: household88
-    coins: ["10000token", "100000stake"]
-  - name: household89
-    coins: ["10000token", "100000stake"]
-  - name: household90
-    coins: ["10000token", "100000stake"]
-  - name: household91
-    coins: ["10000token", "100000stake"]
-  - name: household92
-    coins: ["10000token", "100000stake"]
-  - name: household93
-    coins: ["10000token", "100000stake"]
-  - name: household94
-    coins: ["10000token", "100000stake"]
-  - name: household95
-    coins: ["10000token", "100000stake"]
-  - name: household96
-    coins: ["10000token", "100000stake"]
-  - name: household97
-    coins: ["10000token", "100000stake"]
-  - name: household98
-    coins: ["10000token", "100000stake"]
-  - name: household99
-    coins: ["10000token", "100000stake"]
+    coins: ["10000token", "100000000stake"]
 validator:
-  name: validator0
-  staked: "100000stake"
-  name: validator1
-  staked: "100000stake"
-  name: validator2
-  staked: "100000stake"
-  name: validator3
-  staked: "100000stake"
-  name: validator4
-  staked: "100000stake"
-  name: validator5
-  staked: "100000stake"
-  name: validator6
-  staked: "100000stake"
-  name: validator7
-  staked: "100000stake"
-  name: validator8
-  staked: "100000stake"
-  name: validator9
-  staked: "100000stake"
-  name: validator10
-  staked: "100000stake"
-  name: validator11
-  staked: "100000stake"
-  name: validator12
-  staked: "100000stake"
-  name: validator13
-  staked: "100000stake"
-  name: validator14
-  staked: "100000stake"
-  name: validator15
-  staked: "100000stake"
-  name: validator16
-  staked: "100000stake"
-  name: validator17
-  staked: "100000stake"
-  name: validator18
-  staked: "100000stake"
-  name: validator19
-  staked: "100000stake"
+  name: household0
+  staked: "100000000stake"
+  name: household1
+  staked: "100000000stake"
+  name: household2
+  staked: "100000000stake"
+  name: household3
+  staked: "100000000stake"
+  name: household4
+  staked: "100000000stake"
+  name: household5
+  staked: "100000000stake"
+  name: household6
+  staked: "100000000stake"
+  name: household7
+  staked: "100000000stake"
+  name: household8
+  staked: "100000000stake"
+  name: household9
+  staked: "100000000stake"
+  name: household10
+  staked: "100000000stake"
+  name: household11
+  staked: "100000000stake"
+  name: household12
+  staked: "100000000stake"
+  name: household13
+  staked: "100000000stake"
+  name: household14
+  staked: "100000000stake"
+  name: household15
+  staked: "100000000stake"
+  name: household16
+  staked: "100000000stake"
+  name: household17
+  staked: "100000000stake"
+  name: household18
+  staked: "100000000stake"
+  name: household19
+  staked: "100000000stake"
 client:
-  openapi:
-    path: "docs/static/openapi.yml"
   vuex:
     path: "vue/src/store"
+  openapi:
+    path: "docs/static/openapi.yml"
 faucet:
   name: household1
   coins: ["5token", "100000stake"]
