@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 
 import sys
+import pexpect
 
 if __name__ == '__main__':
     if len(sys.argv) != 5:
-            exit("use: python3 create_config_yml.py <number of households> <number of validators> <number of token> <value of stake>")
+            exit("use: python3 create_files.py <number of households> <number of validators> <number of token> <value of stake>")
 
     households = sys.argv[1]
     token = sys.argv[3]
     stake = sys.argv[4]
     validators = sys.argv[2]
 
+    #create file config.yml
     file = open("../config.yml", "w")
 
     #build accounts
@@ -38,11 +40,9 @@ if __name__ == '__main__':
     file.write('  coins: ["5token", "100000stake"]'+"\n")
     file.close()
 
-    #create file transaction.sh
+    #create file transaction
     file = open("transaction.sh", "w")
-
     file.write("#!/bin/bash"+"\n")
-    for household in range(int(households)):
-         file.write("household"+str(household)+"=$(docker exec checkers checkersd keys show household"+str(household)+ " -a)"+"\n")
-         file.write("export household"+str(household)+"\n")
-         file.write('echo "household'+str(household)+': $household'+str(household)+'"'+"\n")
+    for household in range(int(households)-1):
+            file.write('docker exec -it checkers checkersd tx checkers create-energy --generate-only "$(docker exec checkers checkersd keys show household'+str(household)+' -a)" --from "$(docker exec checkers checkersd keys show household'+str(household)+' -a)"'+"\n")
+    file.close()
