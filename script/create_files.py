@@ -43,6 +43,10 @@ if __name__ == '__main__':
     #create file transaction
     file = open("transaction.sh", "w")
     file.write("#!/bin/bash"+"\n")
+    file.write("start=$SECONDS"+"\n")
     for household in range(int(households)-1):
             file.write('docker exec -it checkers checkersd tx checkers create-energy --generate-only "$(docker exec checkers checkersd keys show household'+str(household)+' -a)" --from "$(docker exec checkers checkersd keys show household'+str(household)+' -a)"'+"\n")
+    file.write("duration=$(( SECONDS - start ))"+"\n")
+    file.write("echo $duration"+"\n")
     file.close()
+    
